@@ -23,7 +23,7 @@ if goAhead == 1
     
     % Run the all important collective detection algorithm, change the function name for different algorithms:
     % Need to set the step size in order N E U B:
-    [CC count] = normalCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults);
+    [CC count] = modeCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults);
     % Display the total number of iterations:
     count
 

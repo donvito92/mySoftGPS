@@ -14,16 +14,20 @@ NEDomain(north, east) = 0;
 
 % Initialize total:
 total = 0;
+count = 0;
 
 % Calculate sum of all other values:
 for i = 1 : size(NEDomain, 1)
     for j = 1 : size(NEDomain, 2)
+        if NEDomain(i, j) == 0
+            count = count + 1;
+        end
         total = total + NEDomain(i, j);
     end
 end
 
 % Calculate average:
-avg = total / ((i * j) - 1);
+avg = total / ((i * j) - count - 1);
 
 % Calculate confidence metric:
 confidenceMetric = maxima / avg;
