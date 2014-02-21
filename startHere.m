@@ -18,6 +18,7 @@ init;
 [roughEstimate] = myAiding();
 
 goAhead = input('Enter "1" to start collective detection, might take a long time : ');
+%goAhead = 1;
 
 if goAhead == 1
     

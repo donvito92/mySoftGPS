@@ -56,6 +56,7 @@ disp('  Raw IF data plotted ')
 disp('  (run setSettings or change settings in "initSettings.m" to reconfigure)')
 disp(' ');
 gnssStart = input('Enter "1" to initiate GNSS processing or "0" to exit : ');
+%gnssStart = 1;
 
 if (gnssStart == 1)
     disp(' ');
