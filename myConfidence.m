@@ -1,4 +1,4 @@
-function [confidenceMetric] = myConfidence(CC, north, east, up, bias)
+function [confidenceMetric] = myConfidence(CC, north, east, up, bias, X)
 
 % This function calculates the confidence with which the position
 % information is asserted. We first calculate the magnitude of maxima,

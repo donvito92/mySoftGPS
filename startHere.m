@@ -17,14 +17,14 @@ init;
 % Provide the information required apriori:
 [roughEstimate] = myAiding();
 
-goAhead = input('Enter "1" to start collective detection, might take a long time : ');
-%goAhead = 1;
+%goAhead = input('Enter "1" to start collective detection, might take a long time : ');
+goAhead = 1;
 
 if goAhead == 1
     
     % Run the all important collective detection algorithm, change the function name for different algorithms:
     % Need to set the step size in order N E U B:
-    [CC count] = modeCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults);
+    [CC count] = normalCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults);
     % Display the total number of iterations:
     count
 
@@ -38,7 +38,7 @@ if goAhead == 1
     deltaE
 
     % Calculate the confidence of the solution:
-    [confidenceMetric] = myConfidence(CC, north, east, up, bias);
+    [confidenceMetric] = newConfidence(CC, north, east, up, bias, 85);
     % Display the confidence:
     confidenceMetric
 

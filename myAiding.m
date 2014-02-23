@@ -21,11 +21,11 @@ roughEstimate.clockBias = 0;
 % Uncertainty in rough estimate:
 roughEstimate.uncertaintyU = 0;
 roughEstimate.uncertaintyE = 250;
-roughEstimate.uncertaintyN = 250;
+roughEstimate.uncertaintyN = roughEstimate.uncertaintyE;
 roughEstimate.uncertaintyClockBias = 150000;
 
 % Step size in all four dimensions:
-roughEstimate.stepN = 25;
-roughEstimate.stepE = 25;
+roughEstimate.stepN = roughEstimate.uncertaintyE/10;
+roughEstimate.stepE = roughEstimate.uncertaintyE/10;
 roughEstimate.stepU = 1;
 roughEstimate.stepB = 150;
