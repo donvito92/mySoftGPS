@@ -13,5 +13,5 @@ deltaN = refN - north;
 deltaE = refE - east;
 
 % Distance as measured in metres:
-deltaN = abs(deltaN) * stepN;
-deltaE = abs(deltaE) * stepE;
+deltaN = deltaN * stepN;
+deltaE = deltaE * stepE;

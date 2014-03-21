@@ -1,5 +1,5 @@
-function [satPositions, satClkCorr] = mySatPos(eph, settings) 
-%SATPOS Calculation of X,Y,Z satellites coordinates at settings.transmitTime for
+function [satPositions, satClkCorr] = mySatPos(eph, transmitTime) 
+%SATPOS Calculation of X,Y,Z satellites coordinates at transmitTime for
 %given ephemeris EPH. Coordinates are calculated for each satellite in the
 %list PRNLIST.
 %[satPositions, satClkCorr] = satpos(eph, settings);
@@ -50,14 +50,14 @@ for satNr = 1 : numOfSatellites
 %% Find initial satellite clock correction --------------------------------
 
     %--- Find time difference ---------------------------------------------
-    dt = check_t(settings.transmitTime - eph.t_oe(satNr));
+    dt = check_t(transmitTime - eph.t_oe(satNr));
 
     %--- Calculate clock correction ---------------------------------------
     satClkCorr(satNr) = (eph.a_f2(satNr) * dt + eph.a_f1(satNr)) * dt + ...
                          eph.a_f0(satNr) - ...
                          eph.TGD(satNr);
 
-    time = settings.transmitTime - satClkCorr(satNr);
+    time = transmitTime - satClkCorr(satNr);
 
 %% Find satellite's position ----------------------------------------------
 

@@ -82,8 +82,6 @@ settings.acqSatelliteList   = 1:32;         %[PRN numbers]
 settings.acqSearchBand      = 14;           %[kHz]
 % Threshold for the signal presence decision rule
 settings.acqThreshold       = 1.8;
-% Transmit time
-settings.transmitTime       = 259243;
 
 %% Tracking loops settings ================================================
 % Code tracking loop parameters

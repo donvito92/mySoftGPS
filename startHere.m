@@ -10,39 +10,84 @@ init;
 % Extract the ephemeris from file:
 [eph] = GSNRxEphemeris('GSNRx.EPH', acquiredSvs);
 
-% Calculate the position of all acquired satellites using the
-% ephemeris. Need to set settings.transmitTime in initSettings.m:
-[satPositions, satClkCorr] = mySatPos(eph, settings);
+coarseOption = input('Enter "1" to solve for coarse time, might take a long time : ');
 
-% Provide the information required apriori:
-[roughEstimate] = myAiding();
+if coarseOption == 1
 
-%goAhead = input('Enter "1" to start collective detection, might take a long time : ');
-goAhead = 1;
+    % Provide the information required apriori:
+    [roughEstimate] = myAiding();
 
-if goAhead == 1
+    %goAhead = input('Enter "1" to start collective detection, might take a long time : ');
+    goAhead = 1;
+
+    if goAhead == 1
+        
+        % Set the initial estimate as the current estimate:
+        newEstimate = roughEstimate;
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol5;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 2000, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol5;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 1000, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol5;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 500, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol5;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 250, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol5;
+
+    end
     
-    % Run the all important collective detection algorithm, change the function name for different algorithms:
-    % Need to set the step size in order N E U B:
-    [CC count] = normalCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults);
-    % Display the total number of iterations:
-    count
-
-    % Find the indices of the maxima in the collective correlogram:
-    [north east up bias] = maxIndices(CC);
-
-    % Calculate the error of the obtained position from correct position:
-    [deltaN deltaE] = myPosError(CC, north, east, roughEstimate.stepN, roughEstimate.stepE);
-    % Display the error:
-    deltaN
-    deltaE
-
-    % Calculate the confidence of the solution:
-    [confidenceMetric] = newConfidence(CC, north, east, up, bias, 85);
-    % Display the confidence:
-    confidenceMetric
-
-    % Plot the correlograms for the north and east search domain:
-    plotNE;
+else
     
+    % Provide the information required apriori:
+    [roughEstimate] = myAiding();
+    
+    % Calculate the position of all acquired satellites using the
+    % ephemeris. Need to set settings.transmitTime in initSettings.m:
+    [satPositions, satClkCorr] = mySatPos(eph, roughEstimate.T);
+
+    %goAhead = input('Enter "1" to start collective detection, might take a long time : ');
+    goAhead = 1;
+
+    if goAhead == 1
+
+        % Set the initial estimate as the current estimate:
+        newEstimate = roughEstimate;
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol4;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 2000, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol4;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 1000, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol4;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 500, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol4;
+        
+        % Generate a new rough estimate based on previous results:
+        [newEstimate] = genNewEstimate(Lat, Long, roughEstimate.ht, clkBias, txTime, 250, 0, 15000);
+        % Run the script for calculating nav solution with coarse time estimation:
+        genNavSol4;
+
+    end
+        
 end

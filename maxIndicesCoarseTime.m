@@ -1,6 +1,6 @@
-function [north east up bias] = maxIndices(CC, roughEstimate)
+function [north east up bias coarseTime] = maxIndicesCoarseTime(CC, roughEstimate)
 
-% This function returns the indices of the maxima in the 4-D correlogram.
+% This function returns the indices of the maxima in the 5-D correlogram.
 
 % Size of collective correlogram:
 s = size(CC);
@@ -12,7 +12,7 @@ m = max(CC(:));
 p = find(CC(:) == m);
 
 % Convert this index to index in matrix:
-[north east up bias] = ind2sub(s, p);
+[north east up bias coarseTime] = ind2sub(s, p);
 
 % Threshold the correlator value to avoid false positives:
 if m < roughEstimate.correlatorThreshold
@@ -20,4 +20,5 @@ if m < roughEstimate.correlatorThreshold
     east = 0;
     up = 0;
     bias = 0;
+    coarseTime = 0;
 end

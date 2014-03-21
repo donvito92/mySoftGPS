@@ -1,4 +1,4 @@
-function [collectiveCorrelogram count] = myCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults)
+function [collectiveCorrelogram count] = normalCollectiveDetection(roughEstimate, satPositions, satClkCorr, results, eph, settings, acqResults)
 
 % Most important function. Returns the collective correlogram. Takes in all the things we have calculated
 % thus far, puts them together and spits out what we are looking for.

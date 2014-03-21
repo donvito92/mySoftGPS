@@ -108,14 +108,18 @@ for PRN = settings.acqSatelliteList
         sigCarr = exp(i*frqBins(frqBinIndex) * phasePoints);
         
         %--- "Remove carrier" from the signal -----------------------------
-        I1      = real(sigCarr .* signal1);
-        Q1      = imag(sigCarr .* signal1);
-        I2      = real(sigCarr .* signal2);
-        Q2      = imag(sigCarr .* signal2);
+%         I1      = real(sigCarr .* signal1);
+%         Q1      = imag(sigCarr .* signal1);
+%         I2      = real(sigCarr .* signal2);
+%         Q2      = imag(sigCarr .* signal2);
+        IQ1 = sigCarr .* signal1;
+        IQ2 = sigCarr .* signal2;
 
         %--- Convert the baseband signal to frequency domain --------------
-        IQfreqDom1 = fft(I1 + j*Q1);
-        IQfreqDom2 = fft(I2 + j*Q2);
+%         IQfreqDom1 = fft(I1 + j*Q1);
+%         IQfreqDom2 = fft(I2 + j*Q2);
+        IQfreqDom1 = fft(IQ1);
+        IQfreqDom2 = fft(IQ2);
 
         %--- Multiplication in the frequency domain (correlation in time
         %domain)

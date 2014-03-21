@@ -20,7 +20,7 @@ roughEstimate.clockBias = 0;
 
 % Uncertainty in rough estimate:
 roughEstimate.uncertaintyU = 0;
-roughEstimate.uncertaintyE = 250;
+roughEstimate.uncertaintyE = 10000;
 roughEstimate.uncertaintyN = roughEstimate.uncertaintyE;
 roughEstimate.uncertaintyClockBias = 150000;
 
@@ -29,3 +29,10 @@ roughEstimate.stepN = roughEstimate.uncertaintyE/10;
 roughEstimate.stepE = roughEstimate.uncertaintyE/10;
 roughEstimate.stepU = 1;
 roughEstimate.stepB = 150;
+roughEstimate.stepT = 0.25;
+
+% Rough estimate of the transmit time:
+roughEstimate.T = 259243.0;
+roughEstimate.uncertaintyT = 1.0;
+
+roughEstimate.correlatorThreshold = 0.5e6;
